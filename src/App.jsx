@@ -1,9 +1,27 @@
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import Layout from './components/Layout'
+import Login from './pages/Login'
+import Register from './pages/Register'
+import Events from './pages/Events'
+import EventDetails from './pages/EventDetails'
+import MyEvents from './pages/MyEvents'
+import NotFound from './pages/NotFound'
+
 function App() {
   return (
-    <div className="app-shell">
-      <h1>Eventide</h1>
-      <p>Event Management System</p>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route element={<Layout />}>
+          <Route path="/" element={<Navigate to="/events" replace />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/events" element={<Events />} />
+          <Route path="/events/:eventId" element={<EventDetails />} />
+          <Route path="/my-events" element={<MyEvents />} />
+          <Route path="*" element={<NotFound />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   )
 }
 
