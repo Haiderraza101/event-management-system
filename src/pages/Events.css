@@ -1,0 +1,25 @@
+.events-hero {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 28px 0 32px;
+  max-width: 62ch;
+}
+
+.results-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
+  font-size: 0.9rem;
+}
+
+.events-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
