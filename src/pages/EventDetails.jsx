@@ -50,6 +50,11 @@ function EventDetails() {
 
   const status_ = statusLabel(event.status)
   const price = formatPrice(event.priceRange)
+  const mapQuery = event.venue
+    ? [event.venue.name, event.venue.address, event.venue.city, event.venue.country]
+        .filter(Boolean)
+        .join(' ')
+    : ''
 
   return (
     <article className="event-detail">
@@ -125,10 +130,37 @@ function EventDetails() {
             </section>
           ) : null}
 
+          {event.attractions.length > 0 ? (
+            <section className="card detail-section">
+              <h2>Lineup</h2>
+              <ul className="lineup">
+                {event.attractions.map((attraction) => (
+                  <li key={attraction.id}>
+                    {attraction.image ? (
+                      <img src={attraction.image} alt="" loading="lazy" />
+                    ) : (
+                      <span className="lineup-fallback" aria-hidden="true">
+                        {attraction.name.charAt(0)}
+                      </span>
+                    )}
+                    <span className="lineup-name">{attraction.name}</span>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ) : null}
+
           {event.pleaseNote ? (
             <section className="card detail-section note-section">
               <h2>Good to know</h2>
               <p>{event.pleaseNote}</p>
+            </section>
+          ) : null}
+
+          {event.seatmap ? (
+            <section className="card detail-section">
+              <h2>Seating map</h2>
+              <img className="seatmap" src={event.seatmap} alt={`Seating map for ${event.name}`} loading="lazy" />
             </section>
           ) : null}
         </div>
@@ -144,6 +176,49 @@ function EventDetails() {
               </a>
             ) : null}
           </div>
+
+          {mapQuery ? (
+            <a
+              className="card map-card"
+              href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapQuery)}`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <span className="map-pin" aria-hidden="true">
+                ⌖
+              </span>
+              <span>
+                <strong>{event.venue.name}</strong>
+                <span className="faint">Open in Google Maps</span>
+              </span>
+            </a>
+          ) : null}
+
+          {event.salesStart || event.promoter ? (
+            <div className="card detail-section">
+              <h2>Ticket information</h2>
+              <dl className="detail-list single">
+                {event.salesStart ? (
+                  <div>
+                    <dt>Sales opened</dt>
+                    <dd>{formatDateLong(event.salesStart.slice(0, 10))}</dd>
+                  </div>
+                ) : null}
+                {event.salesEnd ? (
+                  <div>
+                    <dt>Sales close</dt>
+                    <dd>{formatDateLong(event.salesEnd.slice(0, 10))}</dd>
+                  </div>
+                ) : null}
+                {event.promoter ? (
+                  <div>
+                    <dt>Promoter</dt>
+                    <dd>{event.promoter}</dd>
+                  </div>
+                ) : null}
+              </dl>
+            </div>
+          ) : null}
         </aside>
       </div>
     </article>
