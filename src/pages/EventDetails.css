@@ -1,0 +1,155 @@
+.detail-banner {
+  position: relative;
+  min-height: 340px;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  background: var(--surface-2);
+}
+
+.detail-banner img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.detail-banner-veil {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(10, 10, 20, 0.35) 0%, rgba(10, 10, 20, 0.88) 92%);
+}
+
+.detail-banner-inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-block: 28px 32px;
+  color: #fff;
+}
+
+.detail-banner-inner h1 {
+  color: #fff;
+  max-width: 22ch;
+}
+
+.back-link {
+  align-self: flex-start;
+  font-size: 0.86rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 4px;
+}
+
+.back-link:hover {
+  color: #fff;
+}
+
+.detail-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.detail-sub {
+  color: rgba(255, 255, 255, 0.86);
+  font-size: 1rem;
+}
+
+.detail-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 24px;
+  padding-block: 32px 72px;
+  align-items: start;
+}
+
+.detail-main {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 0;
+}
+
+.detail-section {
+  padding: 22px;
+}
+
+.detail-section h2 {
+  margin-bottom: 14px;
+}
+
+.detail-section p {
+  color: var(--text-muted);
+  white-space: pre-line;
+}
+
+.note-section {
+  border-left: 3px solid var(--warn);
+}
+
+.detail-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 16px;
+  margin: 0;
+}
+
+.detail-list dt {
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  margin-bottom: 3px;
+}
+
+.detail-list dd {
+  margin: 0;
+  font-size: 0.94rem;
+}
+
+.detail-aside {
+  position: sticky;
+  top: 84px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.booking-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 22px;
+}
+
+.booking-price {
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+  font-weight: 600;
+}
+
+.booking-card .btn {
+  margin-top: 4px;
+}
+
+@media (max-width: 900px) {
+  .detail-body {
+    grid-template-columns: 1fr;
+  }
+
+  .detail-aside {
+    position: static;
+    order: -1;
+  }
+}
+
+@media (max-width: 560px) {
+  .detail-banner {
+    min-height: 260px;
+  }
+}
