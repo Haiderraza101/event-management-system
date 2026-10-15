@@ -1,18 +1,22 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import SearchBar from '../components/SearchBar'
 import EventGrid from '../components/EventGrid'
 import Pagination from '../components/Pagination'
 import EmptyState from '../components/EmptyState'
 import ErrorState from '../components/ErrorState'
 import {
   loadEvents,
+  filterChanged,
   pageChanged,
   selectEvents,
   selectEventsError,
   selectEventsStatus,
+  selectFilters,
   selectPage,
   selectPageInfo
 } from '../features/events/eventsSlice'
+import useDebounce from '../hooks/useDebounce'
 import './Events.css'
 
 function Events() {
@@ -22,11 +26,21 @@ function Events() {
   const error = useSelector(selectEventsError)
   const page = useSelector(selectPage)
   const pageInfo = useSelector(selectPageInfo)
+  const filters = useSelector(selectFilters)
+
+  const [searchTerm, setSearchTerm] = useState(filters.keyword)
+  const debouncedTerm = useDebounce(searchTerm)
+
+  useEffect(() => {
+    if (debouncedTerm !== filters.keyword) {
+      dispatch(filterChanged({ key: 'keyword', value: debouncedTerm }))
+    }
+  }, [debouncedTerm, filters.keyword, dispatch])
 
   useEffect(() => {
     const promise = dispatch(loadEvents())
     return () => promise.abort()
-  }, [dispatch, page])
+  }, [dispatch, page, filters])
 
   function handlePageChange(next) {
     dispatch(pageChanged(next))
@@ -43,6 +57,10 @@ function Events() {
           Concerts, matches, theatre and festivals pulled live from the Ticketmaster Discovery API.
         </p>
       </section>
+
+      <div className="events-toolbar">
+        <SearchBar value={searchTerm} onChange={setSearchTerm} />
+      </div>
 
       {status === 'failed' ? (
         <ErrorState message={error} onRetry={() => dispatch(loadEvents())} />
