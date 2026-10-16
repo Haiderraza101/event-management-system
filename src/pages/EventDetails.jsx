@@ -2,7 +2,9 @@ import { useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import Spinner from '../components/Spinner'
+import RegistrationButton from '../components/RegistrationButton'
 import ErrorState from '../components/ErrorState'
+import { selectIsRegistered } from '../features/registrations/registrationsSlice'
 import {
   loadEventDetails,
   selectDetailsError,
@@ -25,6 +27,7 @@ function EventDetails() {
   const event = useSelector(selectEventById(eventId))
   const status = useSelector(selectDetailsStatus)
   const error = useSelector(selectDetailsError)
+  const registered = useSelector(selectIsRegistered(eventId))
 
   useEffect(() => {
     const promise = dispatch(loadEventDetails(eventId))
@@ -170,6 +173,15 @@ function EventDetails() {
             <span className="badge badge-accent">{countdownLabel(event.localDate)}</span>
             <p className="booking-price">{price || 'Price to be announced'}</p>
             {event.priceRange ? <p className="faint">Official face value range</p> : null}
+
+            <RegistrationButton event={event} />
+
+            {registered ? (
+              <p className="registered-note">
+                <span aria-hidden="true">✓</span> You are on the list for this event.
+              </p>
+            ) : null}
+
             {event.url ? (
               <a href={event.url} target="_blank" rel="noreferrer" className="btn btn-ghost btn-block">
                 View on Ticketmaster

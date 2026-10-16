@@ -243,3 +243,22 @@
   grid-template-columns: 1fr;
   gap: 12px;
 }
+
+.registered-note {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.84rem;
+  color: var(--success);
+  font-weight: 500;
+}
+
+.registered-note span {
+  display: grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--success-soft);
+  font-size: 0.7rem;
+}
