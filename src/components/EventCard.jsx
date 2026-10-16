@@ -1,4 +1,6 @@
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { selectRegisteredEventIds } from '../features/registrations/registrationsSlice'
 import {
   formatDateBadge,
   formatTime,
@@ -10,13 +12,15 @@ import {
 import './EventCard.css'
 
 function EventCard({ event, footer }) {
+  const registeredIds = useSelector(selectRegisteredEventIds)
+  const registered = registeredIds.includes(event.id)
   const badge = formatDateBadge(event.localDate)
   const time = event.timeTba ? 'Time TBA' : formatTime(event.localTime)
   const price = formatPrice(event.priceRange)
   const status = statusLabel(event.status)
 
   return (
-    <article className="event-card">
+    <article className={`event-card ${registered ? 'is-registered' : ''}`}>
       <Link to={`/events/${event.id}`} className="event-media" aria-label={event.name}>
         {event.image ? (
           <img src={event.image} alt="" loading="lazy" />
@@ -29,6 +33,7 @@ function EventCard({ event, footer }) {
           <strong>{badge.day}</strong>
           <em>{badge.month}</em>
         </span>
+        {registered ? <span className="registered-ribbon">Registered</span> : null}
         {status.tone !== 'success' ? (
           <span className={`badge badge-${status.tone === 'danger' ? 'warn' : status.tone} status-chip`}>
             {status.text}
