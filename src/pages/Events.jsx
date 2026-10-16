@@ -5,6 +5,7 @@ import SearchBar from '../components/SearchBar'
 import FilterPanel from '../components/FilterPanel'
 import CategoryStrip from '../components/CategoryStrip'
 import EventGrid from '../components/EventGrid'
+import RegistrationButton from '../components/RegistrationButton'
 import Pagination from '../components/Pagination'
 import EmptyState from '../components/EmptyState'
 import ErrorState from '../components/ErrorState'
@@ -172,7 +173,12 @@ function Events() {
               }
             />
           ) : (
-            <EventGrid events={events} loading={loading} skeletonCount={12} />
+            <EventGrid
+              events={events}
+              loading={loading}
+              skeletonCount={12}
+              renderFooter={(event) => <RegistrationButton event={event} size="sm" />}
+            />
           )}
 
           <Pagination page={page} totalPages={pageInfo.totalPages} onChange={handlePageChange} />
