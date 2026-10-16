@@ -1,11 +1,16 @@
 import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import EventGrid from '../components/EventGrid'
 import EmptyState from '../components/EmptyState'
 import RegistrationButton from '../components/RegistrationButton'
+import ConfirmDialog from '../components/ConfirmDialog'
 import { selectCurrentUser } from '../features/auth/authSlice'
-import { selectRegistrationSplit } from '../features/registrations/registrationsSlice'
+import {
+  registrationRemoved,
+  selectRegistrationSplit
+} from '../features/registrations/registrationsSlice'
+import { toastPushed } from '../features/ui/uiSlice'
 import { countdownLabel, formatDateShort } from '../utils/format'
 import './MyEvents.css'
 
@@ -15,9 +20,17 @@ const TABS = [
 ]
 
 function MyEvents() {
+  const dispatch = useDispatch()
   const user = useSelector(selectCurrentUser)
   const { upcoming, completed } = useSelector(selectRegistrationSplit)
   const [tab, setTab] = useState('upcoming')
+  const [pendingCancel, setPendingCancel] = useState(null)
+
+  function confirmCancel() {
+    dispatch(registrationRemoved({ userId: user.id, eventId: pendingCancel.id }))
+    dispatch(toastPushed(`Registration for ${pendingCancel.name} was cancelled.`, 'info'))
+    setPendingCancel(null)
+  }
 
   const counts = { upcoming: upcoming.length, completed: completed.length }
   const active = tab === 'upcoming' ? upcoming : completed
@@ -99,13 +112,26 @@ function MyEvents() {
           events={events}
           renderFooter={(event) =>
             tab === 'upcoming' ? (
-              <RegistrationButton event={event} size="sm" />
+              <RegistrationButton event={event} size="sm" onCancelRequest={setPendingCancel} />
             ) : (
               <span className="badge badge-success">Attended</span>
             )
           }
         />
       )}
+
+      <ConfirmDialog
+        open={Boolean(pendingCancel)}
+        title="Cancel this registration?"
+        message={
+          pendingCancel
+            ? `You will be removed from ${pendingCancel.name}. You can register again later while tickets last.`
+            : ''
+        }
+        confirmLabel="Cancel registration"
+        onConfirm={confirmCancel}
+        onCancel={() => setPendingCancel(null)}
+      />
     </div>
   )
 }

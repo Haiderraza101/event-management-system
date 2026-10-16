@@ -1,10 +1,16 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import Spinner from '../components/Spinner'
 import RegistrationButton from '../components/RegistrationButton'
+import ConfirmDialog from '../components/ConfirmDialog'
 import ErrorState from '../components/ErrorState'
-import { selectIsRegistered } from '../features/registrations/registrationsSlice'
+import {
+  registrationRemoved,
+  selectIsRegistered
+} from '../features/registrations/registrationsSlice'
+import { selectCurrentUser } from '../features/auth/authSlice'
+import { toastPushed } from '../features/ui/uiSlice'
 import {
   loadEventDetails,
   selectDetailsError,
@@ -28,6 +34,8 @@ function EventDetails() {
   const status = useSelector(selectDetailsStatus)
   const error = useSelector(selectDetailsError)
   const registered = useSelector(selectIsRegistered(eventId))
+  const user = useSelector(selectCurrentUser)
+  const [confirming, setConfirming] = useState(false)
 
   useEffect(() => {
     const promise = dispatch(loadEventDetails(eventId))
@@ -174,7 +182,7 @@ function EventDetails() {
             <p className="booking-price">{price || 'Price to be announced'}</p>
             {event.priceRange ? <p className="faint">Official face value range</p> : null}
 
-            <RegistrationButton event={event} />
+            <RegistrationButton event={event} onCancelRequest={() => setConfirming(true)} />
 
             {registered ? (
               <p className="registered-note">
@@ -233,6 +241,19 @@ function EventDetails() {
           ) : null}
         </aside>
       </div>
+
+      <ConfirmDialog
+        open={confirming}
+        title="Cancel this registration?"
+        message={`You will be removed from ${event.name}. You can register again later while tickets last.`}
+        confirmLabel="Cancel registration"
+        onConfirm={() => {
+          dispatch(registrationRemoved({ userId: user.id, eventId: event.id }))
+          dispatch(toastPushed('Your registration has been cancelled.', 'info'))
+          setConfirming(false)
+        }}
+        onCancel={() => setConfirming(false)}
+      />
     </article>
   )
 }
