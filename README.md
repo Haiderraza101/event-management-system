@@ -16,7 +16,7 @@ Built for Web Programming — Assignment 3.
 | Routing | React Router v6 |
 | Build tool | Vite 5 |
 | Data source | Ticketmaster Discovery API v2 |
-| Styling | Hand written CSS with design tokens, light and dark themes |
+| Styling | Hand written CSS with design tokens, dark theme by default |
 
 ---
 
