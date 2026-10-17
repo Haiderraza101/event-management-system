@@ -70,8 +70,11 @@ function Events() {
 
   useEffect(() => {
     const initial = readParams(searchParams)
-    dispatch(filtersReplaced(initial.filters))
-    dispatch(pageChanged(initial.page))
+    const changed = Object.keys(DEFAULT_FILTERS).some(
+      (key) => initial.filters[key] !== DEFAULT_FILTERS[key]
+    )
+    if (changed) dispatch(filtersReplaced(initial.filters))
+    if (initial.page > 0) dispatch(pageChanged(initial.page))
     hydrated.current = true
   }, [])
 

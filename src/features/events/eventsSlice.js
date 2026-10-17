@@ -31,7 +31,7 @@ function buildParams(filters, page) {
     city: filters.city.trim(),
     countryCode: filters.countryCode,
     startDateTime: filters.startDate ? toApiDateTime(filters.startDate) : '',
-    endDateTime: filters.endDate ? toApiDateTime(filters.endDate) : ''
+    endDateTime: filters.endDate ? toApiDateTime(filters.endDate, true) : ''
   }
 }
 

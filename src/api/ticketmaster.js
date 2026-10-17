@@ -98,7 +98,8 @@ function readClassification(event) {
 function readPrices(event) {
   const range = event.priceRanges?.[0]
   if (!range) return null
-  return { min: range.min, max: range.max, currency: range.currency }
+  if (typeof range.min !== 'number' || typeof range.max !== 'number') return null
+  return { min: range.min, max: range.max, currency: range.currency ?? 'USD' }
 }
 
 export function normaliseEvent(event) {

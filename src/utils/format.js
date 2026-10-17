@@ -80,9 +80,10 @@ export function countdownLabel(localDate) {
   return `In ${Math.round(days / 30)} months`
 }
 
-export function toApiDateTime(date) {
+export function toApiDateTime(date, endOfDay = false) {
   if (!date) return ''
-  const value = typeof date === 'string' ? new Date(`${date}T00:00:00`) : date
+  const clock = endOfDay ? 'T23:59:59' : 'T00:00:00'
+  const value = typeof date === 'string' ? new Date(`${date}${clock}`) : date
   if (Number.isNaN(value.getTime())) return ''
   return `${value.toISOString().split('.')[0]}Z`
 }
