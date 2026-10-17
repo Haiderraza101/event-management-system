@@ -1,0 +1,28 @@
+.setup-notice {
+  background: var(--warn-soft);
+  border-bottom: 1px solid color-mix(in srgb, var(--warn) 35%, transparent);
+  color: var(--warn);
+  padding-block: 10px;
+  font-size: 0.85rem;
+}
+
+.setup-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.setup-notice code {
+  padding: 1px 6px;
+  border-radius: 5px;
+  background: color-mix(in srgb, var(--warn) 18%, transparent);
+  font-size: 0.82em;
+}
+
+.setup-notice a {
+  margin-left: auto;
+  font-weight: 700;
+  text-decoration: underline;
+  white-space: nowrap;
+}
