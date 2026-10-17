@@ -11,7 +11,10 @@ function Layout() {
       <ScrollToTop />
       <SetupNotice />
       <Navbar />
-      <main className="app-main">
+      <a className="skip-link" href="#main-content">
+        Skip to content
+      </a>
+      <main className="app-main" id="main-content" tabIndex={-1}>
         <Outlet />
       </main>
       <Footer />

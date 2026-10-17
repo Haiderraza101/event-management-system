@@ -27,8 +27,8 @@ import {
   selectPageInfo
 } from '../features/events/eventsSlice'
 import useDebounce from '../hooks/useDebounce'
-import './Events.css'
 import useDocumentTitle from '../hooks/useDocumentTitle'
+import './Events.css'
 
 function readParams(searchParams) {
   const filters = { ...DEFAULT_FILTERS }

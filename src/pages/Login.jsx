@@ -10,8 +10,8 @@ import {
 } from '../features/auth/authSlice'
 import { toastPushed } from '../features/ui/uiSlice'
 import { validateEmail, hasErrors } from '../utils/validate'
-import './Auth.css'
 import useDocumentTitle from '../hooks/useDocumentTitle'
+import './Auth.css'
 
 function Login() {
   useDocumentTitle('Login')

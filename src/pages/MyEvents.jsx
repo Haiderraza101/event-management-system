@@ -12,8 +12,8 @@ import {
 } from '../features/registrations/registrationsSlice'
 import { toastPushed } from '../features/ui/uiSlice'
 import { countdownLabel, formatDateShort } from '../utils/format'
-import './MyEvents.css'
 import useDocumentTitle from '../hooks/useDocumentTitle'
+import './MyEvents.css'
 
 const TABS = [
   { key: 'upcoming', label: 'Upcoming' },

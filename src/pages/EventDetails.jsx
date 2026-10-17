@@ -25,8 +25,8 @@ import {
   countdownLabel,
   statusLabel
 } from '../utils/format'
-import './EventDetails.css'
 import useDocumentTitle from '../hooks/useDocumentTitle'
+import './EventDetails.css'
 
 function EventDetails() {
   const { eventId } = useParams()

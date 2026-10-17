@@ -17,8 +17,8 @@ import {
   passwordStrength,
   hasErrors
 } from '../utils/validate'
-import './Auth.css'
 import useDocumentTitle from '../hooks/useDocumentTitle'
+import './Auth.css'
 
 const STRENGTH_COLORS = ['#c23b48', '#c23b48', '#9a6a12', '#1a7f55', '#1a7f55', '#1a7f55']
 
