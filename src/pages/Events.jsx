@@ -28,6 +28,7 @@ import {
 } from '../features/events/eventsSlice'
 import useDebounce from '../hooks/useDebounce'
 import './Events.css'
+import useDocumentTitle from '../hooks/useDocumentTitle'
 
 function readParams(searchParams) {
   const filters = { ...DEFAULT_FILTERS }
@@ -49,6 +50,8 @@ function writeParams(filters, page) {
 }
 
 function Events() {
+  useDocumentTitle('Events')
+
   const dispatch = useDispatch()
   const [searchParams, setSearchParams] = useSearchParams()
 

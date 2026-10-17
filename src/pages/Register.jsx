@@ -18,12 +18,15 @@ import {
   hasErrors
 } from '../utils/validate'
 import './Auth.css'
+import useDocumentTitle from '../hooks/useDocumentTitle'
 
 const STRENGTH_COLORS = ['#c23b48', '#c23b48', '#9a6a12', '#1a7f55', '#1a7f55', '#1a7f55']
 
 const EMPTY_FORM = { name: '', email: '', password: '', confirmation: '' }
 
 function Register() {
+  useDocumentTitle('Create account')
+
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const status = useSelector(selectAuthStatus)

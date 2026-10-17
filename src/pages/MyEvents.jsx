@@ -13,6 +13,7 @@ import {
 import { toastPushed } from '../features/ui/uiSlice'
 import { countdownLabel, formatDateShort } from '../utils/format'
 import './MyEvents.css'
+import useDocumentTitle from '../hooks/useDocumentTitle'
 
 const TABS = [
   { key: 'upcoming', label: 'Upcoming' },
@@ -20,6 +21,8 @@ const TABS = [
 ]
 
 function MyEvents() {
+  useDocumentTitle('My events')
+
   const dispatch = useDispatch()
   const user = useSelector(selectCurrentUser)
   const { upcoming, completed } = useSelector(selectRegistrationSplit)

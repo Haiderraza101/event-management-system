@@ -11,8 +11,11 @@ import {
 import { toastPushed } from '../features/ui/uiSlice'
 import { validateEmail, hasErrors } from '../utils/validate'
 import './Auth.css'
+import useDocumentTitle from '../hooks/useDocumentTitle'
 
 function Login() {
+  useDocumentTitle('Login')
+
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const location = useLocation()

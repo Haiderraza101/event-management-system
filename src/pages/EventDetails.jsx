@@ -26,6 +26,7 @@ import {
   statusLabel
 } from '../utils/format'
 import './EventDetails.css'
+import useDocumentTitle from '../hooks/useDocumentTitle'
 
 function EventDetails() {
   const { eventId } = useParams()
@@ -36,6 +37,8 @@ function EventDetails() {
   const registered = useSelector(selectIsRegistered(eventId))
   const user = useSelector(selectCurrentUser)
   const [confirming, setConfirming] = useState(false)
+
+  useDocumentTitle(event?.name)
 
   useEffect(() => {
     const promise = dispatch(loadEventDetails(eventId))
