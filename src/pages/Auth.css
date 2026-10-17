@@ -18,8 +18,8 @@
 .auth-aside {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  gap: 32px;
+  justify-content: center;
+  gap: 28px;
   padding: 40px;
   background: linear-gradient(150deg, #4a3bc4, #7b5ff0 55%, #b07bff);
   color: #fff;

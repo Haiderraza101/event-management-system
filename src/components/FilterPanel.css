@@ -10,7 +10,7 @@
   flex-wrap: wrap;
   align-items: center;
   gap: 10px;
-  padding: 12px 14px;
+  padding: 12px 16px;
 }
 
 .filter-count {
@@ -59,22 +59,28 @@
 }
 
 .sort-field .select {
-  padding-block: 8px;
+  height: 38px;
   border-radius: 999px;
   font-size: 0.85rem;
 }
 
 .filter-body {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 14px;
-  padding: 16px 14px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 14px 16px;
+  padding: 16px;
   border-top: 1px solid var(--border);
 }
 
+.filter-body .field {
+  flex: 1 1 170px;
+  min-width: 0;
+}
+
 .filter-reset {
-  display: flex;
-  align-items: flex-end;
+  flex: 0 0 auto;
+  margin-left: auto;
 }
 
 @media (max-width: 640px) {
@@ -85,5 +91,20 @@
 
   .sort-field {
     flex: 1;
+  }
+}
+
+@media (max-width: 560px) {
+  .filter-body .field {
+    flex: 1 1 100%;
+  }
+
+  .filter-reset {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .filter-reset .btn {
+    width: 100%;
   }
 }
