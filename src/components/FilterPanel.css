@@ -60,7 +60,9 @@
 
 .sort-field .select {
   height: 38px;
+  padding-right: 34px;
   border-radius: 999px;
+  background-position: right 12px center;
   font-size: 0.85rem;
 }
 

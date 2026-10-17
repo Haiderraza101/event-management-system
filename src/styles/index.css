@@ -2,6 +2,7 @@
 
 :root {
   color-scheme: light;
+  --chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.75 6 6.25 11 1.75' fill='none' stroke='%2363637a' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
   --bg: #f6f6fb;
   --surface: #ffffff;
   --surface-2: #f0f0f7;
@@ -33,6 +34,7 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) {
     color-scheme: dark;
+    --chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.75 6 6.25 11 1.75' fill='none' stroke='%23a3a2b8' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
     --bg: #0e0e16;
     --surface: #16161f;
     --surface-2: #1e1e2b;
@@ -233,6 +235,16 @@ textarea {
   border: 1px solid var(--border-strong);
   border-radius: var(--radius-sm);
   transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 38px;
+  background-image: var(--chevron);
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 12px 8px;
 }
 
 .input::placeholder {
